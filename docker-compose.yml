@@ -1,0 +1,32 @@
+---
+version: '3.0'
+services:
+  goapp:
+    build: go-webapp
+    ports:
+      - 5000
+
+  goapp-bench:
+    image: httpd
+    command: ab -c 100 -n 100000 http://goapp:5000/
+
+  nimapp:
+    build: nim-webapp
+    ports:
+      - 5000
+
+  nimapp-bench:
+    image: httpd
+    command: ab -c 100 -n 100000 http://nimapp:5000/
+
+  cadvisor:
+    image: google/cadvisor
+    ports:
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+...
