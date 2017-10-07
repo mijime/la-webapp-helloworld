@@ -3,7 +3,7 @@ FROM nimlang/nim:alpine AS build-env
 RUN nimble refresh
 COPY . /var/app
 WORKDIR /var/app
-RUN nimble build
+RUN nimble build -d:release --opt:speed
 
 FROM alpine
 
