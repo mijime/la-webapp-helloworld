@@ -19,6 +19,9 @@ services:
     image: httpd
     command: ab -c 100 -n 100000 http://nimapp:5000/
 
+  bench-vegeta:
+    build: bench-vegeta
+
   cadvisor:
     image: google/cadvisor
     ports:
